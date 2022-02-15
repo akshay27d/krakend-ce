@@ -372,6 +372,8 @@ github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx2
 github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc h1:biVzkmvwrH8WK8raXaxBx6fRVTlJILwEwQGL1I/ByEI=
 github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc/go.mod h1:paBWMcWSl3LHKBqUq+rly7CNSldXjb2rDl3JlRe0mD8=
 github.com/bouk/httprouter v0.0.0-20160817010721-ee8b3818a7f5/go.mod h1:CDReaxg1cmLrtcasZy43l4EYPAknXLiQSrb7tLw5zXM=
+github.com/bradleyjkemp/memviz v0.2.3-0.20180316110040-22923f80fa1e h1:i6PeCOEfSrnc5A8wNJE0eqH8w1D8And/6EbrFYdvl8o=
+github.com/bradleyjkemp/memviz v0.2.3-0.20180316110040-22923f80fa1e/go.mod h1:O8KbRC1I+XiOeTs6+KcaCuME1yAAEc54zsQrlv6nkKg=
 github.com/briankassouf/jose v0.9.2-0.20180619214549-d2569464773f h1:ZMEzE7R0WNqgbHplzSBaYJhJi5AZWTCK9baU0ebzG6g=
 github.com/briankassouf/jose v0.9.2-0.20180619214549-d2569464773f/go.mod h1:HQhVmdUf7dBNwIIdBTivnCDxcf6IZY3/zrb+uKSJz6Y=
 github.com/c-bata/go-prompt v0.2.2/go.mod h1:VzqtzE2ksDBcdln8G7mk2RX9QyGjH+OVqOCSiVIqS34=
@@ -629,6 +631,8 @@ github.com/devopsfaith/krakend-martian v0.0.0-20191207191841-92e3287c36d9 h1:KR9
 github.com/devopsfaith/krakend-martian v0.0.0-20191207191841-92e3287c36d9/go.mod h1:rgjNUD1sqpJj2VFeJdm7NA41BrEOf/Uj8Iv2rPQPlGI=
 github.com/devopsfaith/krakend-martian v1.4.0 h1:m2PTaMSy/4rdgz3subGVnotH66hAG0bVleY1Ta0FpWQ=
 github.com/devopsfaith/krakend-martian v1.4.0/go.mod h1:Wu/oy51cIHj8kK7O6hyRM7wdJvDgah03f8Z2Y7rAdPk=
+github.com/devopsfaith/krakend-memviz v1.4.0 h1:A0Y4PrK4jBHoZNzJ4jJ9aU6TfBV6asuP1TlhEvXiXj0=
+github.com/devopsfaith/krakend-memviz v1.4.0/go.mod h1:suCV9Ph5znq4VXZiCpwZr1uJAGqyfthwPnuYB3t8lbI=
 github.com/devopsfaith/krakend-metrics v1.1.0 h1:6JHSKz9ZfnxJR2ljjEiM0dRPFP72woZsgeoClrT4zBA=
 github.com/devopsfaith/krakend-metrics v1.1.0/go.mod h1:9CtMjn/CmxHTh5I9s/wq3FYSpjE8O10Gh0yJwCHkaps=
 github.com/devopsfaith/krakend-metrics v1.4.0 h1:LTy8oqMVHF5aMJaW+Gi/n0W20RjVE0uHI3IcouYaBTc=

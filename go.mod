@@ -32,6 +32,7 @@ require (
 	github.com/devopsfaith/krakend-logstash v1.4.0
 	github.com/devopsfaith/krakend-lua v1.4.0
 	github.com/devopsfaith/krakend-martian v1.4.0
+	github.com/devopsfaith/krakend-memviz v1.4.0
 	github.com/devopsfaith/krakend-metrics v1.4.0
 	github.com/devopsfaith/krakend-oauth2-clientcredentials v1.4.0
 	github.com/devopsfaith/krakend-opencensus v1.4.1
