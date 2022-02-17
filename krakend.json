@@ -174,7 +174,7 @@
       ]
     },
     {
-      "endpoint": "/v0/transform_example/{customer_public_id}",
+      "endpoint": "/v0/customer_and_recipients/{customer_public_id}",
       "method": "GET",
       "output_encoding": "json",
       "extra_config": {},
