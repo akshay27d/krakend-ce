@@ -7,7 +7,7 @@
   "extra_config": {
     "github_com/devopsfaith/krakend/transport/http/server/handler": {
       "name": "authPlugin"
-   }
+    }
   },
   "timeout": "3000ms",
   "cache_ttl": "300s",
@@ -149,7 +149,7 @@
       ]
     },
     {
-      "endpoint": "/v3/auth/login",
+      "endpoint": "/v1/session",
       "method": "POST",
       "output_encoding": "no-op",
       "extra_config": {},
@@ -158,7 +158,7 @@
       ],
       "backend": [
         {
-          "url_pattern": "/v3/auth/login",
+          "url_pattern": "/v1/session",
           "querystring_params": [
             "*"
           ],
@@ -167,10 +167,54 @@
           "method": "POST",
           "extra_config": {},
           "host": [
-            "https://api.remitly.io/"
+            "http://auth-service-preprod.dev.remitly.com/"
           ],
           "disable_host_sanitize": false
         }
+      ]
+    },
+    {
+      "endpoint": "/v0/transform_example/{customer_public_id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v2/customer/{customer_public_id}/recipients",
+          "querystring_params": [
+            "*"
+          ],
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://recipient-service-preprod.us-west-2.remitly.com/"
+          ],
+          "disable_host_sanitize": false
+        },
+        {
+          "url_pattern": "/v2/customer/profile",
+          "querystring_params": [
+            "customer_public_id"
+          ],
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://cxcoreservice-preprod.us-west-2.remitly.com/"
+          ],
+          "disable_host_sanitize": false
+        }
+      ],
+      "querystring_params": [
+        "customer_public_id"
+      ],
+      "headers_to_pass": [
+        "X-Request-ID",
+        "Locale",
+        "Remitly-Originating-Ip"
       ]
     }
   ]
