@@ -7,6 +7,13 @@
   "extra_config": {
     "github_com/devopsfaith/krakend/transport/http/server/handler": {
       "name": "authPlugin"
+    },
+    "github_com/devopsfaith/krakend-gologging": {
+      "level": "INFO",
+      "prefix": "[KRAKEND]",
+      "syslog": true,
+      "stdout": true,
+      "format": "default"
     }
   },
   "timeout": "3000ms",
@@ -32,6 +39,41 @@
           "method": "GET",
           "extra_config": {},
           "disable_host_sanitize": false,
+          "host": [
+            "http://concert-service-preprod.us-west-2.remitly.com"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "customer_id",
+        "send_country",
+        "receive_country",
+        "slots",
+        "supported_content"
+      ],
+      "extra_config": {}
+    },
+    {
+      "endpoint": "/concert_content_with_filtering",
+      "headers_to_pass": [
+        "*"
+      ],
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/v1/slots/content",
+          "querystring_params": [
+            "*"
+          ],
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "disable_host_sanitize": false,
+          "deny": [
+            "home_stack_nca.campaign"
+          ],
           "host": [
             "http://concert-service-preprod.us-west-2.remitly.com"
           ]
@@ -181,9 +223,6 @@
       "backend": [
         {
           "url_pattern": "/v2/customer/{customer_public_id}/recipients",
-          "querystring_params": [
-            "*"
-          ],
           "encoding": "json",
           "sd": "static",
           "method": "GET",
@@ -215,6 +254,113 @@
         "X-Request-ID",
         "Locale",
         "Remitly-Originating-Ip"
+      ]
+    },
+    {
+      "endpoint": "/v0/customer_and_recipients_slimmed_down/{customer_public_id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/v2/customer/{customer_public_id}/recipients",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "http://recipient-service-preprod.us-west-2.remitly.com/"
+          ],
+          "disable_host_sanitize": false,
+          "extra_config": {
+            "github.com/devopsfaith/krakend/proxy": {
+              "flatmap_filter": [
+                {
+                  "type": "del",
+                  "args": [
+                    "recipients.*.address"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "url_pattern": "/v2/customer/profile",
+          "querystring_params": [
+            "customer_public_id"
+          ],
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://cxcoreservice-preprod.us-west-2.remitly.com/"
+          ],
+          "disable_host_sanitize": false,
+          "allow": [
+            "first_name",
+            "middle_name",
+            "last_name"
+          ]
+        }
+      ],
+      "querystring_params": [
+        "customer_public_id"
+      ],
+      "headers_to_pass": [
+        "X-Request-ID",
+        "Locale",
+        "Remitly-Originating-Ip"
+      ]
+    },
+    {
+      "endpoint": "/concert_content_with_chaining",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {
+        "github.com/devopsfaith/krakend/proxy": {
+          "sequential": true
+        }
+      },
+      "querystring_params": [
+        "customer_public_id",
+        "customer_id",
+        "supported_content",
+        "slots"
+      ],
+      "headers_to_pass": [
+        "X-Request-ID",
+        "Locale",
+        "Remitly-Originating-Ip"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/v2/customer/profile",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://cxcoreservice-preprod.us-west-2.remitly.com/"
+          ],
+          "disable_host_sanitize": false
+        },
+        {
+          "url_pattern": "/v1/slots/content?send_country={resp0_country_code}&receive_country={resp0_receiving_country_code}",
+          "querystring_params": [
+            "customer_id",
+            "supported_content",
+            "slots"
+          ],
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://concert-service-preprod.us-west-2.remitly.com"
+          ],
+          "disable_host_sanitize": false
+        }
       ]
     }
   ]

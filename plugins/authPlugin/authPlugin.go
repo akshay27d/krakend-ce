@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
 )
 
@@ -36,7 +37,12 @@ func (r registerer) registerHandlers(ctx context.Context, extra map[string]inter
 
 	client := &http.Client{Timeout: 3 * time.Second}
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		if req.RequestURI == "/v18/bootstrap" {
+		if strings.Contains(req.RequestURI, "bootstrap") {
+			if req.Header["Authorization"] == nil || len(req.Header["Authorization"]) == 0 {
+				w.WriteHeader(401)
+				return
+			}
+
 			data := url.Values{}
 			data.Set("product_line_name", "remitly")
 
